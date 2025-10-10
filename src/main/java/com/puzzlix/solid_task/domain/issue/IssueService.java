@@ -3,8 +3,6 @@ package com.puzzlix.solid_task.domain.issue;
 import com.puzzlix.solid_task.domain.issue.dto.IssueRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.swing.*;
 import java.util.List;
 
 @Service

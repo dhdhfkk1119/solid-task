@@ -29,7 +29,6 @@ public class IssueController {
     @GetMapping
     public ResponseEntity<CommonResponseDto<List<IssueResponse.FindAll>>> getIssues(){
         List<Issue> issues = issueService.findIssues();
-
         List<IssueResponse.FindAll> responseDtos = IssueResponse.FindAll.from(issues);
         return ResponseEntity.ok(CommonResponseDto.success(responseDtos));
     }
