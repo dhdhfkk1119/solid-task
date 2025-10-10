@@ -239,4 +239,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Ignore Gradle system files
+.gradle/
+
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,eclipse,intellij
