@@ -18,6 +18,6 @@ public class Issue {
     private IssueStatus issueStatus;
 
     private Long projectId;
-    private Long userId;
+    private Long reportId;
     private Long assigneeId;
 }
