@@ -1,19 +1,23 @@
 package com.puzzlix.solid_task.domain.user;
 
 import com.puzzlix.solid_task.domain.user.dto.UserRequest;
+import com.puzzlix.solid_task.domain.user.login.LoginStrategy;
+import com.puzzlix.solid_task.domain.user.login.LoginStrategyFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final LoginStrategyFactory factory;
 
+    @Transactional
     public User signUp(UserRequest.SignUp request){
         // 이메일 중복확인
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
@@ -29,17 +33,12 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public User login(UserRequest.Login request) {
+    public User login(String type,UserRequest.Login request) {
         
-        // 1. 이메일로 사용자 조회
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("이메일이 존재하지 않습니다"));
-
-        // 암호화된 비밀번호와 사용자가 입력한 비밀번호 비교
-        if(!passwordEncoder.matches(request.getPassword(), user.getPassword())){
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다");
-        }
-
-        return user;
+        // 팩토리에 알맞은 로그인 전략을 요청
+        LoginStrategy loginStrategy = factory.findStrategy(type);
+        
+        // 해당 전략을 선택하여 로그인 요청 완료
+        return loginStrategy.login(request);
     }
 }

@@ -7,10 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,9 +22,10 @@ public class UserController {
         return ResponseEntity.ok(CommonResponseDto.success(null,"회원 가입 성공"));
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<CommonResponseDto<?>> loginUp(@Valid @RequestBody UserRequest.Login request) {
-        User user = userService.login(request);
+    @PostMapping("/login/{type}")
+    public ResponseEntity<CommonResponseDto<?>> loginUp(@PathVariable("type") String type,
+                                                        @Valid @RequestBody UserRequest.Login request) {
+        User user = userService.login(type,request);
         String token = jwtTokenProvider.createToken(user.getEmail());
         return ResponseEntity.ok(CommonResponseDto.success(token,"로그인 성공"));
     }
