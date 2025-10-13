@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-@ToString
+@ToString(exclude = "issues")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
