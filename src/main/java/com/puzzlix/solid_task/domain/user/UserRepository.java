@@ -2,6 +2,9 @@ package com.puzzlix.solid_task.domain.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User,Long> {
+import java.util.Optional;
 
+public interface UserRepository extends JpaRepository<User,Long> {
+    // 이메일 중복 여부 확인 - 메서드 쿼리
+    Optional<User> findByEmail(String email);
 }

@@ -11,12 +11,6 @@ public class CommonResponseDto<T> {
     private T data;
     private String message;
 
-//    public CommonResponseDto(boolean success,T data , String message){
-//        this.success = success;
-//        this.data = data;
-//        this.message = message;
-//    }
-
     // 정적 팩토리 메서드(팩토리 패턴과 다른 개념)
     // static 객체 속성이 아니라 클래스에 포함 - className.add();
     public static <T> CommonResponseDto<T> success(T data, String message){
