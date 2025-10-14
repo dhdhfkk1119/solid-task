@@ -26,6 +26,15 @@ public class IssueController {
                 body(CommonResponseDto.success(createdIssue));
     }
 
+    @PutMapping("/{issueId}")
+    public ResponseEntity<CommonResponseDto<IssueResponse.FindById>> updateIssue(@PathVariable("issueId") Long issuedId,
+                                                                @RequestBody IssueRequest.Update update){
+        Issue issue = issueService.updateIssue(issuedId,update);
+        return ResponseEntity.ok(CommonResponseDto.success(new IssueResponse.FindById(issue),"성공적으로 변경되었습니다"));
+    }
+
+
+
     @GetMapping
     public ResponseEntity<CommonResponseDto<List<IssueResponse.FindAll>>> getIssues(){
         List<Issue> issues = issueService.findIssues();

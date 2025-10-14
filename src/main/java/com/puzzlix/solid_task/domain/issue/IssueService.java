@@ -22,6 +22,34 @@ public class IssueService {
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
 
+    public Issue updateIssue(Long issueId , IssueRequest.Update request){
+        Issue issue = issueRepository.findById(issueId)
+                .orElseThrow(() -> new NoSuchElementException("해당 이슈가 존재하지 없습니다"));
+
+        if(request.getAssignId() != null) {
+            User assignee = userRepository.findById(request.getAssignId())
+                    .orElseThrow(() -> new NoSuchElementException("해당 ID에 담당자를 찾을 수없습니다"));
+            issue.setAssignee(assignee);
+        } else {
+            issue.setAssignee(null);
+        }
+
+        issue.setTitle(request.getTitle());
+        issue.setDescription(request.getDescription());
+        return issue;
+
+
+    }
+
+    public void deleteIssue(Long issueId){
+        if(!issueRepository.existsById(issueId)){
+            throw new NoSuchElementException("해당 ID를 찾을 수 없습니다");
+        }
+        issueRepository.deleteById(issueId);
+    }
+
+
+
     public Issue createIssue(IssueRequest.Create request){
 
         User reporter = userRepository.findById(request.getReporterId())

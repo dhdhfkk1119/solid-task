@@ -1,5 +1,6 @@
 package com.puzzlix.solid_task.domain.issue.dto;
 
+import com.puzzlix.solid_task.domain.issue.IssueStatus;
 import lombok.Data;
 
 public class IssueRequest {
@@ -12,5 +13,12 @@ public class IssueRequest {
         private String description;
         private Long projectId;
         private Long reporterId;
+    }
+
+    @Data
+    public static class Update{
+        private String title;
+        private String description;
+        private Long assignId;
     }
 }

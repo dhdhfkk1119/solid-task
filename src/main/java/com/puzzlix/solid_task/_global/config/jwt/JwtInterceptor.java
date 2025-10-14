@@ -22,8 +22,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         }
 
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"유효하지 않은 토큰입니다");
-
-        return HandlerInterceptor.super.preHandle(request,response,handler);
+        return false;
     }
 
     private String resolveToken(HttpServletRequest request){
