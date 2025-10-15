@@ -1,6 +1,7 @@
 package com.puzzlix.solid_task.domain.user;
 
 import com.puzzlix.solid_task.domain.issue.Issue;
+import com.puzzlix.solid_task.domain.user.role.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,9 @@ public class User {
     private String name;
     private String email;
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToMany(mappedBy = "reporter", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Issue> issues = new ArrayList<>();

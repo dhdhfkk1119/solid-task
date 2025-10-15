@@ -26,7 +26,7 @@ public class UserController {
     public ResponseEntity<CommonResponseDto<?>> loginUp(@PathVariable("type") String type,
                                                         @Valid @RequestBody UserRequest.Login request) {
         User user = userService.login(type,request);
-        String token = jwtTokenProvider.createToken(user.getEmail());
+        String token = jwtTokenProvider.createToken(user);
         return ResponseEntity.ok(CommonResponseDto.success(token,"로그인 성공"));
     }
 }

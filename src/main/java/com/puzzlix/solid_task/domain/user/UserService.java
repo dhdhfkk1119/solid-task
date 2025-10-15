@@ -3,6 +3,7 @@ package com.puzzlix.solid_task.domain.user;
 import com.puzzlix.solid_task.domain.user.dto.UserRequest;
 import com.puzzlix.solid_task.domain.user.login.LoginStrategy;
 import com.puzzlix.solid_task.domain.user.login.LoginStrategyFactory;
+import com.puzzlix.solid_task.domain.user.role.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class UserService {
         newUser.setName(request.getName());
         newUser.setEmail(request.getEmail());
         newUser.setPassword(encodePassword);
+        newUser.setRole(request.getRole() != null ? request.getRole() : Role.USER);
         return userRepository.save(newUser);
     }
 

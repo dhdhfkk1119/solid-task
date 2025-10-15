@@ -1,5 +1,6 @@
 package com.puzzlix.solid_task.domain.user.dto;
 
+import com.puzzlix.solid_task.domain.user.role.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -22,7 +23,7 @@ public class UserRequest {
         @Size(min = 4, max = 20)
         private String password;
 
-
+        private Role role;
     }
 
     @Data
