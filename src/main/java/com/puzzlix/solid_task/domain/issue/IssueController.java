@@ -28,14 +28,15 @@ public class IssueController {
     }
 
     @PatchMapping("/{issueId}/status")
-    public ResponseEntity<CommonResponseDto<Issue>> updateIssueStatus(@PathVariable("issueId") Long issueId,
+    public ResponseEntity<?> updateIssueStatus(@PathVariable("issueId") Long issueId,
                                                                       @RequestParam("status") IssueStatus issueStatus,
                                                                       @RequestAttribute("userEmail") String userEmail,
                                                                       @RequestAttribute("userRole") Role userRole){
 
         Issue issue = issueService.updateIssueStatus(issueId,issueStatus,userEmail,userRole);
+        IssueResponse.FindById responseDTO = new IssueResponse.FindById(issue);
 
-        return ResponseEntity.ok(CommonResponseDto.success(issue,"성공적으로 변경되었습니다"));
+        return ResponseEntity.ok(CommonResponseDto.success(responseDTO,"성공적으로 변경되었습니다"));
     }
 
     @PutMapping("/{issueId}")

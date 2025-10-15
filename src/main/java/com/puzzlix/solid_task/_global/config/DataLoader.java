@@ -27,13 +27,13 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User testUser1 = userRepository.save(
-                new User(null,"홍길동","test@naver.com",passwordEncoder.encode("1234"), Role.USER,new ArrayList<>()));
+                new User(null,"홍길동","test@naver.com",passwordEncoder.encode("1234"), Role.USER));
         User testUser2 = userRepository.save(
-                new User(null,"이순신","leesunsin@naver.com",passwordEncoder.encode("1234"),Role.USER,new ArrayList<>()));
+                new User(null,"이순신","leesunsin@naver.com",passwordEncoder.encode("1234"),Role.USER));
         User testUser3 = userRepository.save(
-                new User(null,"관리자","leesunsin@naver.com",passwordEncoder.encode("1234"),Role.ADMIN,new ArrayList<>()));
+                new User(null,"관리자","admin@naver.com",passwordEncoder.encode("1234"),Role.ADMIN));
 
-        Project testProject = projectRepository.save(new Project(null,"SOLID Task 프로젝트","SOLID 개념 학습 ",new ArrayList<>()));
+        Project testProject = projectRepository.save(new Project(null,"SOLID Task 프로젝트","SOLID 개념 학습 "));
         issueRepository.save(new Issue(null,"로그인 기능 구현","JWT 필요", IssueStatus.TODO,testUser1,null,testProject,new ArrayList<>()));
         issueRepository.save(new Issue(null, "검색 기능 구현 요청", "이슈 전체 목록에 검색 기능이 필요합니다", IssueStatus.TODO,  testUser2, null, testProject,new ArrayList<>()));
 

@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-@ToString(exclude = "issues")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +28,4 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "reporter", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Issue> issues = new ArrayList<>();
 }
