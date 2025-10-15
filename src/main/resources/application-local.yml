@@ -46,4 +46,4 @@ jwt:
 
 notification:
   policy:
-    on-status-done: EMAIL # 이슈 상태가 DONE 으로 변경되어쓸때 사용할 알립 타입 지정
+    on-status-done: SMS # 이슈 상태가 DONE 으로 변경되어쓸때 사용할 알립 타입 지정
